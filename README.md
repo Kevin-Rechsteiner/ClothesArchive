@@ -24,15 +24,6 @@ Photograph your clothes, track laundry, and plan outfits — all offline on your
 
 In development — personal project by a student developer.
 
-## Getting Started
-
-```bash
-git clone https://github.com/(your name)/wardrobe-manager
-cd wardrobe-manager
-npm install
-npx expo start
-```
-
 ## Roadmap
 
 - [ ] Basic clothing archive with photos
