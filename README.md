@@ -1,34 +1,50 @@
-# Wardrobe Manager
+# Welcome to your Expo app 👋
 
-A personal wardrobe management app built with React Native (Expo).
-Photograph your clothes, track laundry, and plan outfits — all offline on your phone.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Features
+## Get started
 
-- Photo archive for every clothing item
-- Product info: material, wash instructions, category, color, brand
-- Laundry tracking — move items to "in the wash" and back
-- Accessory management (no laundry tracking needed)
-- Outfit builder — combine available items and save presets
-- Laundry timer — reminder to move clothes from washer to dryer
-- Fully offline — all data stored locally on your device
+1. Install dependencies
 
-## Tech Stack
+   ```bash
+   npm install
+   ```
 
-- [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/)
-- SQLite (local database)
-- expo-camera, expo-image-picker
-- expo-notifications (timer & reminders)
+2. Start the app
 
-## Status
+   ```bash
+   npx expo start
+   ```
 
-In development — personal project by a student developer.
+In the output, you'll find options to open the app in a
 
-## Roadmap
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-- [ ] Basic clothing archive with photos
-- [ ] Laundry status tracking
-- [ ] Outfit presets
-- [ ] Accessory section
-- [ ] Wash/dry timer with notifications
-- [ ] Optional: cloud sync
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
+```bash
+npm run reset-project
+```
+
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
