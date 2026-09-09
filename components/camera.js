@@ -1,82 +1,67 @@
-class CameraComponent extends Component {
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 
-    state = {
-        hasCameraPermission: null,
-        type: Camera.Constants.Type.back
-    }
+export default function CameraComponent() {
+  const [facing, setFacing] = useState('back');
+  const [permission, requestPermission] = useCameraPermissions();
 
-    async componentWillMount() {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({ hasCameraPermission: status === 'granted' })
-    }
+  if (!permission) {
+    return <View />;
+  }
 
-    render() {
-        const { hasCameraPermission } = this.state
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="Grant permission" />
+      </View>
+    );
+  }
 
-        if (hasCameraPermission === null) {
-            return <View />
-        }
-        else if (hasCameraPermission === false) {
-            return <Text> No access to camera</Text>
-        }
-        else {
-            return (
-                <View style={{ flex: 1 }}>
-                    <Camera
-                        style={{ flex: 1, justifyContent: 'space-between' }}
-                        type={this.state.type}
-                    >
-                        <Header
-                            searchBar
-                            rounded
-                            style={{
-                                position: 'absolute',
-                                backgroundColor: 'transparent',
-                                left: 0,
-                                top: 0,
-                                right: 0,
-                                zIndex: 100,
-                                alignItems: 'center'
-                            }}
-                        >
-                            <View style={{ flexDirection: 'row', flex: 4 }}>
-                                <Ionicons name="md-camera" style={{ color: 'white' }} />
-                                <Item style={{ backgroundColor: 'transparent' }}>
-                                    <Icon name="ios-search" style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}></Icon>
-                                </Item>
-                            </View>
+  function toggleCameraFacing() {
+    setFacing((current) => (current === 'back' ? 'front' : 'back'));
+  }
 
-                            <View style={{ flexDirection: 'row', flex: 2, justifyContent: 'space-around' }}>
-                                <Icon name="ios-flash" style={{ color: 'white', fontWeight: 'bold' }} />
-                                <Icon
-                                    onPress={() => {
-                                        this.setState({
-                                            type: this.state.type === Camera.Constants.Type.back ?
-                                                Camera.Constants.Type.front :
-                                                Camera.Constants.Type.back
-                                        })
-                                    }}
-                                    name="ios-reverse-camera"
-                                    style={{ color: 'white', fontWeight: 'bold' }}
-                                />
-                            </View>
-                        </Header>
-
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 30, marginBottom: 15, alignItems: 'flex-end' }}>
-                            <Ionicons name="ios-map" style={{ color: 'white', fontSize: 36 }}></Ionicons>
-                            <View></View>
-                            <View style={{ alignItems: 'center' }}>
-                                <MaterialCommunityIcons name="circle-outline"   // This is the icon which should take and save image
-                                                        style={{ color: 'white', fontSize: 100 }}
-                                ></MaterialCommunityIcons>
-                                <Icon name="ios-images" style={{ color: 'white', fontSize: 36 }} />
-                            </View>
-                        </View>
-                    </Camera>
-                </View>
-            )
-        }
-    }
+  return (
+    <View style={styles.container}>
+      <CameraView style={styles.camera} facing={facing} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+          <Text style={styles.text}>Flip Camera</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
-export default CameraComponent;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  camera: {
+    flex: 1,
+  },
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 64,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    width: '100%',
+    paddingHorizontal: 64,
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});

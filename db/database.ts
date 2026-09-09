@@ -41,6 +41,10 @@ export function initDatabase() {
     INSERT OR IGNORE INTO brands (name) VALUES ('Zara');
     INSERT OR IGNORE INTO brands (name) VALUES ('H&M');
     INSERT OR IGNORE INTO brands (name) VALUES ('Uniqlo');
+    CREATE TABLE IF NOT EXISTS settings (
+      key TEXT PRIMARY KEY,
+      value TEXT
+    );
   `);
 
   try {
@@ -52,8 +56,5 @@ export function initDatabase() {
   } catch {
   }
 }
-try {
-  db.execSync(`ALTER TABLE clothes ADD COLUMN wash_status TEXT DEFAULT 'verfügbar';`);
-} catch {}
 
 export default db;

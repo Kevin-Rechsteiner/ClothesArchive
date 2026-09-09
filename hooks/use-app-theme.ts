@@ -1,13 +1,16 @@
 import { AppPalette, Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useThemeMode } from '@/hooks/theme-context';
 
 export function useAppTheme() {
-  const scheme = useColorScheme() ?? 'light';
+  const { scheme } = useThemeMode();
+  const safeScheme = scheme === 'dark' ? 'dark' : 'light';
+  const colors = AppPalette[safeScheme];
+  const navigation = Colors[safeScheme];
 
   return {
-    scheme,
-    isDark: scheme === 'dark',
-    colors: AppPalette[scheme],
-    navigation: Colors[scheme],
+    scheme: safeScheme,
+    isDark: safeScheme === 'dark',
+    colors,
+    navigation,
   };
 }

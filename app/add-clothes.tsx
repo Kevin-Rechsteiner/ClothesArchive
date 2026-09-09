@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
-import {
-    View, Text, TextInput, TouchableOpacity,
-    StyleSheet, ScrollView, Modal, FlatList
-} from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { router } from 'expo-router';
-import { addClothes } from '@/db/queries';
-import { getAllBrands, addBrand } from '@/db/queries';
+import { addBrand, addClothes, getAllBrands } from '@/db/queries';
 
 const CATEGORIES = ['T-Shirt', 'Hose', 'Jacke', 'Pullover', 'Longsleeve'];
 const COLORS = ['Schwarz', 'Weiss', 'Grau', 'Blau', 'Rot', 'Grün', 'Orange', 'Violett'];
@@ -77,7 +73,7 @@ function BrandModal({
                     />
                     {search.trim() !== '' && !filtered.find(b => b.toLowerCase() === search.toLowerCase()) && (
                         <TouchableOpacity style={styles.addNewButton} onPress={handleAdd}>
-                            <Text style={styles.addNewText}>+ "{search.trim()}" hinzufügen</Text>
+                            <Text style={styles.addNewText}>+ &quot;{search.trim()}&quot; hinzufügen</Text>
                         </TouchableOpacity>
                     )}
                     <FlatList

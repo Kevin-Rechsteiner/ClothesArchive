@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { addBrand, getAllBrands, getClothesById, updateClothes } from '@/db/queries';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
-    View, Text, TextInput, TouchableOpacity,
-    StyleSheet, ScrollView, Modal, FlatList, Alert
+    Alert,
+    FlatList,
+    Modal,
+    ScrollView,
+    StyleSheet,
+    Text, TextInput, TouchableOpacity,
+    View
 } from 'react-native';
-import { useLocalSearchParams, router } from 'expo-router';
-import { getClothesById, updateClothes, getAllBrands, addBrand } from '@/db/queries';
 
 const CATEGORIES = ['T-Shirt', 'Hose', 'Jacke', 'Pullover', 'Longsleeve'];
 const COLORS = ['Schwarz', 'Weiss', 'Grau', 'Blau', 'Rot', 'Grün', 'Orange', 'Violett'];
@@ -68,7 +73,7 @@ function BrandModal({ visible, brands, onSelect, onClose }: {
                     />
                     {search.trim() !== '' && !filtered.find(b => b.toLowerCase() === search.toLowerCase()) && (
                         <TouchableOpacity style={styles.addNewButton} onPress={handleAdd}>
-                            <Text style={styles.addNewText}>+ "{search.trim()}" hinzufügen</Text>
+                            <Text style={styles.addNewText}>+ &quot;{search.trim()}&quot; hinzufügen</Text>
                         </TouchableOpacity>
                     )}
                     <FlatList
@@ -207,7 +212,7 @@ export default function EditClothesScreen() {
 
 const styles = StyleSheet.create({
     container: { flex: 1, padding: 20, paddingTop: 60 },
-    title: { fontSize: 24, fontWeight: '600', marginBottom: 24 },
+    title: { fontSize: 24, fontWeight: '600', marginBottom: 24, color: 'white' },
     field: { marginBottom: 16, color: 'white' },
     label: { fontSize: 13, color: '#666', marginBottom: 4 },
     input: {
